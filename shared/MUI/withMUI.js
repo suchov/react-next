@@ -1,7 +1,7 @@
-import React from "react";
+import React, { Component } from "react";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
-import injectTapEventPlugin from "react-app-event-plugin";
+import injectTapEventPlugin from "react-tap-event-plugin";
 import Head from "next/head";
 import {
   PRIMARY_COLOR,
@@ -10,7 +10,7 @@ import {
   ACCENT_COLOR_ONE,
   ACCENT_COLOR_TWO,
   ACCENT_COLOR_THREE
-} from ".theme";
+} from "./theme";
 import { get } from "https";
 
 try {
@@ -24,17 +24,17 @@ const withMaterialUI = ComposedComponent => {
     static async getInitialProps(ctx) {
       const { req } = ctx;
       const userAgent = req ? req.headers["user-agent"] : navigator.userAgent;
-      const supProps = await ComposedComponent.getInitialProps(ctx);
+      // const supProps = await ComposedComponent.getInitialProps(ctx);
 
       return {
-        ...subProps,
+        // ...subProps,
         userAgent
       };
     }
     render() {
       const { userAgent } = this.props;
       const Lato = "lato, sans-serif";
-      const nuiTheme = getMuiTheme(
+      const muiTheme = getMuiTheme(
         {
           fontFamily: Lato,
           palette: {
