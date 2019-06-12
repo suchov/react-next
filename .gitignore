@@ -1,0 +1,10 @@
+.next
+.ts-node
+node_modules
+
+static
+vendors
+
+*.manifest.json
+
+/page.html
