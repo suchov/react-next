@@ -14,6 +14,22 @@ app.prepare().then(() => {
   //setting up the redirect to enforce users to go to blog
   server.get("/", (req, res) => res.redirect(301, "/blog"));
 
+  //setup links for our blog posts
+  server.get("/blog/:id", (req, res) => {
+    return app.render(
+      req,
+      res,
+      "/post",
+      Object.assign({ id: req.param.id }, req.query)
+    );
+  });
+
+  //config for handly call the post route if there id - redirect to blog post if no id redirect to home page
+  server.get("/post", (req, res) => {
+    if (req.query.id) return res.redirect(`/blog/${req.query.id}`);
+    req.redirect(301, "/blog");
+  });
+
   //we are handling any known request that are made to our server with *
   server.get("/*", (req, res) => handle(req, res));
 
