@@ -11,12 +11,11 @@ import {
   ACCENT_COLOR_TWO,
   ACCENT_COLOR_THREE
 } from "./theme";
-import { get } from "https";
 
 try {
   injectTapEventPlugin();
 } catch (e) {
-  //Can only be called onece per application lifecycle
+  // Can only be called once per application lifecycle
 }
 
 const withMaterialUI = ComposedComponent => {
@@ -24,13 +23,14 @@ const withMaterialUI = ComposedComponent => {
     static async getInitialProps(ctx) {
       const { req } = ctx;
       const userAgent = req ? req.headers["user-agent"] : navigator.userAgent;
-      // const supProps = await ComposedComponent.getInitialProps(ctx);
+      const subProps = await ComposedComponent.getInitialProps(ctx);
 
       return {
-        // ...subProps,
+        ...subProps,
         userAgent
       };
     }
+
     render() {
       const { userAgent } = this.props;
       const Lato = "lato, sans-serif";
@@ -53,13 +53,14 @@ const withMaterialUI = ComposedComponent => {
           userAgent
         }
       );
+
       return (
         <div>
           <Head>
             <title>Nextjs Blogger</title>
             <meta
               name="viewport"
-              content="initial-scale=1.0 with=device-width"
+              content="initial-scale=1.0, width=device-width"
             />
             <link
               href="https://fonts.googleapis.com/css?family=Lato"

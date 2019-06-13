@@ -1,5 +1,6 @@
 .next
 .ts-node
+.env
 node_modules
 
 static
